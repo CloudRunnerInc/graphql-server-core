@@ -116,6 +116,10 @@ def load_json_variables(variables):
 
 
 def get_graphql_params(data, query_data):
+    # handle file uploads from apollo-upload-client
+    operations = data.get('operations', None)
+    if operations:
+        data = json.loads(operations)
     query = data.get('query') or query_data.get('query')
     variables = data.get('variables') or query_data.get('variables')
     # id = data.get('id')
